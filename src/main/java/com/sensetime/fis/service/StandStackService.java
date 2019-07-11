@@ -1,5 +1,7 @@
 package com.sensetime.fis.service;
 
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+
 /**
  * . 任务服务
  * @author z.hj
@@ -10,5 +12,5 @@ public interface StandStackService {
     /**
      * 任务-1
      */
-    void StandStackDeserializationSchema();
+    void StandStackDeserializationSchema(StreamExecutionEnvironment env);
 }

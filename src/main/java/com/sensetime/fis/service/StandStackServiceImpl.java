@@ -36,15 +36,7 @@ public class StandStackServiceImpl implements StandStackService{
     private static BufferedImage image;
 
     @Override
-    public void StandStackDeserializationSchema() {
-//        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-
-        String[] jars = {
-                "D:\\code\\rws3\\msg-analyze-service\\target\\msg-analyze-service.jar.original"
-        };
-
-        StreamExecutionEnvironment env = StreamExecutionEnvironment
-                .createRemoteEnvironment("10.5.2.97", 8061, 2, jars);
+    public void StandStackDeserializationSchema(StreamExecutionEnvironment env) {
 
         try {
             image = ImageIO.read(new FileInputStream("src/main/resources/birdview.png"));

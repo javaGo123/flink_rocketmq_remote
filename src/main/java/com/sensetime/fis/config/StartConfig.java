@@ -9,11 +9,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class StartConfig {
-
-
     StartConfig(){
         System.setProperty("spring.application.name","msg-analyze-service");
     }
-
-
 }

@@ -1,5 +1,6 @@
 package com.sensetime.fis.common.serialization;
 
+
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.sensetime.fis.model.StandStackBean;
 import com.sensetime.plutus.commonapis.Commonapis;
