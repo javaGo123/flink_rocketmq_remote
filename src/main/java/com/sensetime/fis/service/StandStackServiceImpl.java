@@ -7,7 +7,9 @@ import com.sensetime.fis.model.StandStackBean;
 import com.sensetime.fis.redis.CustomRedisWrapper;
 import com.sensetime.fis.util.CommonUtils;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.redis.RedisSink;
@@ -33,30 +35,29 @@ import java.util.Properties;
 public class StandStackServiceImpl implements StandStackService{
 
 
-    private static BufferedImage image;
 
     @Override
     public void StandStackDeserializationSchema(StreamExecutionEnvironment env) {
-
-        try {
-            image = ImageIO.read(new FileInputStream("src/main/resources/birdview.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         Properties consumerProps = new Properties();
         consumerProps.setProperty(RocketMQConfig.NAME_SERVER_ADDR, "10.5.2.97:9876");
         consumerProps.setProperty(RocketMQConfig.CONSUMER_GROUP, "stand_c_2");
         consumerProps.setProperty(RocketMQConfig.CONSUMER_TOPIC, "stand_stack_source");
 
-
         SingleOutputStreamOperator<Tuple2<String, String>> dataStream = env.addSource(new RocketMQSource<StandStackBean>(new StandStackDeserializationSchema(), consumerProps))
-                .map(new MapFunction<StandStackBean, Tuple2<String, String>>() {
+                .map(new RichMapFunction<StandStackBean, Tuple2<String, String>>() {
+                    BufferedImage image;
+                    @Override
+                    public void open(Configuration parameters) throws Exception {
+                        super.open(parameters);
+//                        image = ImageIO.read(new FileInputStream("/home/birdview.png"));
+                    }
+
                     @Override
                     public Tuple2<String, String> map(StandStackBean value) throws Exception {
                         int centerX = (value.getStack().get(0).getLocation().getX1() + value.getStack().get(0).getLocation().getX2()) / 2;
                         int centerY = (value.getStack().get(0).getLocation().getY1() + value.getStack().get(0).getLocation().getY2()) / 2;
-                        value.getStack().get(0).setBetting_box(CommonUtils.positionToBoxNum(image, centerX, centerY));
+//                        value.getStack().get(0).setBetting_box(CommonUtils.positionToBoxNum(image, centerX, centerY));
                         System.out.println("centerX==>" + centerX + "  centerY===>" + centerY + "  bettingBox===> " + value.getStack().get(0));
                         return new Tuple2<>(value.getStandKey(), new Gson().toJson(value));
                     }
