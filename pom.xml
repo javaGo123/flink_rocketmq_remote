@@ -46,7 +46,7 @@
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-flink</artifactId>
-            <version>0.0.3-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <!--Lombok-->
         <dependency>
@@ -58,12 +58,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
-        <!--测试依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!-- stream-rocketmq -->
@@ -98,17 +92,17 @@
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java_2.11</artifactId>
+            <artifactId>flink-streaming-java_2.12</artifactId>
             <version>1.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-clients_2.11</artifactId>
+            <artifactId>flink-clients_2.12</artifactId>
             <version>1.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-queryable-state-runtime_2.11</artifactId>
+            <artifactId>flink-queryable-state-runtime_2.12</artifactId>
             <version>1.8.0</version>
         </dependency>
         <dependency>
@@ -129,13 +123,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-cep_2.11</artifactId>
-            <version>1.8.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka-0.10_2.11</artifactId>
+            <artifactId>flink-cep_2.12</artifactId>
             <version>1.8.0</version>
         </dependency>
 
